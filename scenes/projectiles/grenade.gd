@@ -1,8 +1,7 @@
 extends RigidBody2D
 
 
-@export var speed: int = 1000
-var direction: Vector2 = Vector2.UP
+@export var speed: int = 750
 
-func _process(delta):
-	position += direction * speed * delta
+func explode():
+	$AnimationPlayer.play("Explosion")

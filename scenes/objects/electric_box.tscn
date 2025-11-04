@@ -6,6 +6,8 @@
 size = Vector2(358, 254)
 
 [node name="ElectricBox" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 11
 
 [node name="ElectricBox" type="Sprite2D" parent="."]
 texture = ExtResource("1_nx8wp")
