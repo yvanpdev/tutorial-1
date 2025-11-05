@@ -1,5 +1,200 @@
-[gd_scene load_steps=2 format=3 uid="uid://6eiq4goc0h2y"]
+[gd_scene load_steps=14 format=4 uid="uid://6eiq4goc0h2y"]
 
 [ext_resource type="PackedScene" uid="uid://cgc7071007t1v" path="res://scenes/levels/level.tscn" id="1_8ht0b"]
+[ext_resource type="TileSet" uid="uid://bwa0hl8y673yr" path="res://scenes/levels/house.tres" id="2_b1uqu"]
+[ext_resource type="Texture2D" uid="uid://ds7mahuc7w5qv" path="res://graphics/ground/dirt.png" id="2_n4crx"]
+[ext_resource type="Script" uid="uid://drh4h873m2wn8" path="res://scenes/levels/inside.gd" id="2_tkhku"]
+[ext_resource type="PackedScene" uid="uid://ivvab4gnfrg3" path="res://scenes/levels/outside.tscn" id="3_7r4nv"]
+[ext_resource type="PackedScene" uid="uid://cdi0vb5geecuh" path="res://scenes/objects/wall_lamp.tscn" id="4_6serm"]
+[ext_resource type="PackedScene" uid="uid://onpdy75jxora" path="res://scenes/objects/light_fan_animation.tscn" id="4_71x7e"]
+[ext_resource type="PackedScene" uid="uid://ckxumvw17subs" path="res://scenes/objects/simple_light.tscn" id="5_x0st6"]
+[ext_resource type="Texture2D" uid="uid://c0woo457hjglr" path="res://graphics/lights/textures/circle.png" id="6_0kuad"]
+[ext_resource type="Texture2D" uid="uid://cxmmqprtvuwdg" path="res://graphics/lights/overlays/infrastructure.png" id="6_x0st6"]
+[ext_resource type="Texture2D" uid="uid://s4uhjvey1xva" path="res://graphics/lights/overlays/hole.png" id="7_0kuad"]
+[ext_resource type="Texture2D" uid="uid://onu3qo8772x3" path="res://graphics/lights/overlays/lattice.png" id="8_tkhku"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kuad"]
+size = Vector2(1000, 436)
 
 [node name="Inside" instance=ExtResource("1_8ht0b")]
+script = ExtResource("2_tkhku")
+outside_level_scene = ExtResource("3_7r4nv")
+
+[node name="Dirt" type="Sprite2D" parent="Ground" index="0"]
+texture_repeat = 2
+position = Vector2(-771, 301)
+texture = ExtResource("2_n4crx")
+region_enabled = true
+region_rect = Rect2(-2511.174, -2482.456, 10000, 10000)
+metadata/_edit_lock_ = true
+
+[node name="TileMapLayer" parent="Ground" index="1"]
+metadata/_edit_lock_ = true
+
+[node name="Floor" type="TileMapLayer" parent="Ground/TileMapLayer" index="0"]
+tile_map_data = PackedByteArray("AAD+/wAAAQAAAAEAAAD+/wEAAQAAAAEAAAD+/wIAAQAAAAEAAAD/////AQABAAEAAAD//wAAAQABAAEAAAD//wEAAQABAAEAAAD//wIAAQABAAEAAAAAAP//AQABAAEAAAAAAAAAAQABAAEAAAAAAAEAAQABAAEAAAABAAAAAQABAAEAAAABAAEAAQABAAEAAAACAAAAAQABAAEAAAACAAEAAQABAAEAAAADAAAAAQABAAEAAAADAAIAAQAAAAEAAAAEAP//AQABAAEAAAAEAAAAAQABAAEAAAAEAAEAAQABAAEAAAAEAAIAAQABAAEAAAAFAP//AQABAAEAAAAFAAAAAQABAAEAAAAFAAEAAQAAAAQAAAAFAAIAAQACAAEAAAADAPv/AQABAAEAAAAEAPv/AQABAAEAAAAEAPz/AQABAAEAAAAEAP3/AQABAAEAAAAEAP7/AQABAAEAAAAFAPv/AQABAAEAAAAFAPz/AQABAAEAAAAFAP3/AQABAAEAAAAFAP7/AQABAAEAAAAGAPv/AQABAAEAAAAGAPz/AQABAAEAAAAGAP3/AQABAAEAAAAGAP7/AQABAAEAAAAGAP//AQABAAEAAAAGAAAAAQABAAEAAAAGAAEAAQABAAIAAAAHAPv/AQABAAEAAAAHAPz/AQABAAEAAAAHAP3/AQABAAEAAAAHAP7/AQABAAEAAAAHAP//AQABAAEAAAAHAAAAAQABAAEAAAAHAAEAAQABAAIAAAAIAPv/AQABAAEAAAAIAPz/AQABAAEAAAAIAP3/AQABAAEAAAAIAP7/AQABAAEAAAAIAP//AQABAAEAAAAIAAAAAQABAAEAAAAIAAEAAQABAAIAAAD8//z/AQABAAAAAAD8//3/AQABAAEAAAD8//7/AQABAAEAAAD8////AQABAAEAAAD9//z/AQABAAAAAAD9//3/AQABAAEAAAD9//7/AQABAAEAAAD9////AQAAAAQAAAD+//z/AQABAAAAAAD+//3/AQABAAEAAAD+//7/AQABAAEAAAD///z/AQABAAUAAAD///3/AQABAAEAAAD///7/AQABAAEAAAAAAPz/AQABAAEAAAAAAP7/AQABAAEAAAD4////AQABAAEAAAD4/wAAAQABAAEAAAD4/wEAAQABAAEAAAD4/wIAAQABAAEAAAD5////AQABAAEAAAD5/wAAAQABAAEAAAD5/wEAAQABAAEAAAD5/wIAAQABAAEAAAD6////AQABAAEAAAD6/wAAAQABAAEAAAD6/wEAAQABAAEAAAD6/wIAAQABAAEAAAD7////AQABAAEAAAD7/wAAAQABAAEAAAD7/wEAAQABAAEAAAD7/wIAAQABAAEAAAD8/wAAAQABAAEAAAD8/wEAAQABAAEAAAD8/wIAAQABAAEAAAD///r/AQABAAEAAAD///v/AQABAAQAAAAAAPr/AQABAAEAAAAAAPv/AQABAAEAAAABAPr/AQABAAEAAAABAPv/AQABAAEAAAACAPr/AQABAAEAAAACAPv/AQABAAEAAAADAPr/AQABAAEAAAAEAPr/AQABAAEAAAD5//j/AQABAAEAAAD5//n/AQABAAEAAAD5//r/AQABAAEAAAD6//j/AQABAAEAAAD6//n/AQABAAEAAAD6//r/AQABAAEAAAD7//j/AQABAAEAAAD7//n/AQABAAEAAAD7//r/AQABAAEAAAD8//j/AQABAAEAAAD8//n/AQABAAEAAAD8//r/AQABAAEAAAD9//j/AQABAAEAAAD9//n/AQABAAEAAAD9//r/AQABAAEAAAD+//j/AQABAAEAAAD+//n/AQABAAEAAAD+//r/AQABAAEAAAD//wMAAQABAAIAAAAEAAMAAQABAAYAAAAFAAMAAQACAAIAAAD4/wMAAQABAAIAAAD5/wMAAQABAAIAAAD6/wMAAQABAAIAAAD7/wMAAQABAAIAAAD8/wMAAQABAAIAAAD9/wAAAQACAAEAAAD5//v/AQABAAIAAAD6//v/AQABAAIAAAD7//v/AQABAAIAAAD8//v/AQABAAIAAAD9//v/AQABAAIAAAD+//v/AQABAAIAAAD3////AQAAAAEAAAD3/wAAAQAAAAEAAAD3/wEAAQAAAAEAAAD3/wIAAQAAAAEAAAD7//z/AQAAAAAAAAD7//3/AQAAAAEAAAD4//j/AQAAAAEAAAD4//n/AQAAAAEAAAD4//r/AQAAAAEAAAAJAPv/AQACAAEAAAAJAPz/AQACAAEAAAAJAP3/AQACAAEAAAAJAP7/AQACAAEAAAAJAP//AQACAAEAAAAJAAAAAQACAAEAAAAFAPr/AQAAAAUAAAD///j/AQACAAEAAAD///n/AQAAAAUAAAD9/wEAAQACAAEAAAD9/wIAAQACAAEAAAD5//f/AQABAAAAAAD6//f/AQABAAAAAAD7//f/AQABAAAAAAD8//f/AQABAAAAAAD9//f/AQABAAAAAAD+//f/AQABAAAAAAAAAPn/AQABAAAAAAABAPn/AQABAAAAAAACAPn/AQABAAAAAAADAPn/AQABAAAAAAAEAPn/AQABAAAAAAAGAPr/AQABAAAAAAAHAPr/AQABAAAAAAAIAPr/AQABAAAAAAACAAIAAQACAAQAAAD4//7/AQABAAAAAAD5//7/AQABAAAAAAD6//7/AQABAAAAAAD3//7/AQAAAAAAAAD3/wMAAQAAAAIAAAD9/wMAAQACAAIAAAD7//7/AQABAAUAAAD4//f/AQAAAAAAAAD4//v/AQAAAAIAAAD///f/AQACAAAAAAAFAPn/AQACAAAAAAAJAPr/AQACAAAAAAAJAAEAAQACAAIAAAABAAIAAQACAAQAAAD+/wMAAQAAAAIAAAAAAAMAAQACAAIAAAD+////AQABAAQAAAADAAMAAQAAAAIAAAAAAAIAAQACAAEAAAADAAEAAQABAAEAAAACAPz/AQABAAIAAAACAP//AQABAAAAAAADAP7/AQAAAAEAAAABAP3/AQACAAEAAAABAP7/AQACAAEAAAADAP3/AQAAAAEAAAADAPz/AQABAAQAAAABAP//AQAAAAUAAAADAP//AQABAAUAAAABAPz/AQAAAAQAAAAAAP3/AQABAAEAAAA=")
+tile_set = ExtResource("2_b1uqu")
+metadata/_edit_lock_ = true
+
+[node name="InnerWalls" type="TileMapLayer" parent="Ground/TileMapLayer" index="1"]
+tile_map_data = PackedByteArray("AAD5/wEAAQADAAYAAAD7/wEAAQADAAYAAAD5////AQADAAYAAAD7////AQADAAYAAAD5//7/AQAFAAYAAAD4/wEAAQAAAAYAAAD3/wEAAQAEAAcAAAD5/wIAAQABAAgAAAD7/wMAAQADAAgAAAD7//7/AQABAAYAAAD///v/AQADAAcAAAD///n/AQABAAYAAAA=")
+tile_set = ExtResource("2_b1uqu")
+metadata/_edit_lock_ = true
+
+[node name="OuterWalls" type="TileMapLayer" parent="Ground/TileMapLayer" index="2"]
+tile_map_data = PackedByteArray("AAAJAPv/AQAFAAEAAAAJAPz/AQAFAAEAAAAJAP3/AQAFAAEAAAAJAP7/AQAFAAEAAAAJAP//AQAFAAEAAAAJAAAAAQAFAAEAAAAJAAEAAQAFAAIAAAD9/wAAAQAFAAEAAAD9/wEAAQAFAAEAAAD9/wIAAQAFAAEAAAABAPz/AQADAAAAAAABAP3/AQAFAAEAAAABAP7/AQAFAAEAAAD4//j/AQAFAAEAAAD4//n/AQAFAAEAAAD4//r/AQAFAAEAAAD7//z/AQADAAAAAAD7//3/AQAFAAEAAAD7//7/AQAFAAIAAAD3////AQAFAAEAAAD3/wAAAQAFAAEAAAD3/wEAAQAFAAEAAAD3/wIAAQAFAAEAAAD4/wMAAQAEAAIAAAD5/wMAAQAEAAIAAAD6/wMAAQAEAAIAAAD7/wMAAQAEAAIAAAD8/wMAAQAEAAIAAAD3/wMAAQADAAIAAAD9/wMAAQAFAAIAAAD//wMAAQAEAAIAAAAAAAMAAQAFAAIAAAD+/wAAAQAFAAEAAAD+/wEAAQAFAAEAAAD+/wIAAQAFAAEAAAD+/wMAAQADAAIAAAABAP//AQADAAIAAAD4//v/AQADAAIAAAADAAMAAQADAAIAAAAEAAMAAQAEAAIAAAAFAAMAAQAFAAIAAAAFAAIAAQAFAAEAAAAFAAEAAQADAAAAAAAGAAEAAQAEAAAAAAAHAAEAAQAEAAAAAAAIAAEAAQAEAAAAAAAJAPr/AQAFAAAAAAAFAPr/AQADAAIAAAAGAPr/AQAEAAAAAAAHAPr/AQAEAAAAAAAIAPr/AQAEAAAAAAD///n/AQADAAIAAAAAAPn/AQAEAAAAAAABAPn/AQAEAAAAAAACAPn/AQAEAAAAAAADAPn/AQAEAAAAAAAEAPn/AQAEAAAAAAD5//f/AQAEAAAAAAD6//f/AQAEAAAAAAD7//f/AQAEAAAAAAD8//f/AQAEAAAAAAD9//f/AQAEAAAAAAD+//f/AQAEAAAAAAD4//f/AQADAAAAAAD5//v/AQAEAAIAAAD6//v/AQAEAAIAAAD7//v/AQAEAAIAAAD8//v/AQAEAAIAAAD9//v/AQAEAAIAAAD+//v/AQAEAAIAAAD9//z/AQAEAAAAAAD+//z/AQAEAAAAAAD8//z/AQAEAAAAAAD///z/AQAFAAIAAAD///v/AQAFAAAAAAD6//7/AQAEAAIAAAD5//7/AQAEAAIAAAD4//7/AQAEAAIAAAD3//7/AQADAAAAAAD///j/AQAFAAEAAAD///f/AQAFAAAAAAAFAPn/AQAFAAAAAAADAAIAAQADAAEAAAAAAAIAAQAFAAEAAAD+////AQAFAAAAAAD9////AQADAAAAAAADAPz/AQAFAAAAAAADAP7/AQAFAAEAAAADAP//AQAFAAIAAAACAPz/AQAEAAAAAAACAP//AQAEAAIAAAADAP3/AQAFAAEAAAA=")
+tile_set = ExtResource("2_b1uqu")
+metadata/_edit_lock_ = true
+
+[node name="WallLamp" parent="Ground" index="2" instance=ExtResource("4_6serm")]
+position = Vector2(-1462, -3212)
+metadata/_edit_group_ = true
+
+[node name="WallLamp2" parent="Ground" index="3" instance=ExtResource("4_6serm")]
+position = Vector2(-1071, -1273)
+
+[node name="WallLamp4" parent="Ground" index="4" instance=ExtResource("4_6serm")]
+position = Vector2(-3200, 121)
+rotation = 1.5707964
+
+[node name="WallLamp3" parent="Ground" index="5" instance=ExtResource("4_6serm")]
+position = Vector2(1088, -2447)
+
+[node name="WallLamp5" parent="Ground" index="6" instance=ExtResource("4_6serm")]
+position = Vector2(3597, -771)
+rotation = 1.5707964
+
+[node name="SimpleLight" parent="Ground" index="7" instance=ExtResource("5_x0st6")]
+position = Vector2(956, -109)
+
+[node name="SimpleLight6" parent="Ground" index="8" instance=ExtResource("5_x0st6")]
+position = Vector2(982, -1453)
+rotation = 3.1415927
+
+[node name="SimpleLight3" parent="Ground" index="9" instance=ExtResource("5_x0st6")]
+position = Vector2(505, -528)
+rotation = 1.5707964
+
+[node name="SimpleLight4" parent="Ground" index="10" instance=ExtResource("5_x0st6")]
+position = Vector2(508, -996)
+rotation = 1.5707964
+
+[node name="SimpleLight2" parent="Ground" index="11" instance=ExtResource("5_x0st6")]
+position = Vector2(1441, -560)
+rotation = -1.5707964
+
+[node name="SimpleLight5" parent="Ground" index="12" instance=ExtResource("5_x0st6")]
+position = Vector2(1447, -982)
+rotation = -1.5707964
+
+[node name="Player" parent="." index="2"]
+position = Vector2(773, 632.99994)
+metadata/_edit_group_ = true
+
+[node name="PointLight2D" type="PointLight2D" parent="Player" index="8"]
+energy = 1.79
+texture = ExtResource("6_0kuad")
+texture_scale = 2.09
+
+[node name="Lights" parent="." index="3"]
+metadata/_edit_lock_ = true
+
+[node name="LightFanAnimation" parent="Lights" index="0" instance=ExtResource("4_71x7e")]
+position = Vector2(-1058, -733)
+autoplay = "default"
+frame_progress = 0.08607971
+
+[node name="LightFanAnimation2" parent="Lights" index="1" instance=ExtResource("4_71x7e")]
+position = Vector2(1449, 366)
+autoplay = "default"
+frame_progress = 0.95917284
+
+[node name="LightFanAnimation3" parent="Lights" index="2" instance=ExtResource("4_71x7e")]
+position = Vector2(545, -1799)
+autoplay = "default"
+frame_progress = 0.022524346
+
+[node name="LightFanAnimation4" parent="Lights" index="3" instance=ExtResource("4_71x7e")]
+position = Vector2(-1173, -2450)
+autoplay = "default"
+frame_progress = 0.5420241
+
+[node name="LightFanAnimation5" parent="Lights" index="4" instance=ExtResource("4_71x7e")]
+position = Vector2(2586, -985)
+autoplay = "default"
+frame_progress = 0.792078
+
+[node name="Infrastructure" type="Sprite2D" parent="Lights" index="5"]
+modulate = Color(1, 1, 1, 0.0627451)
+position = Vector2(3036, -780.9999)
+scale = Vector2(1.744, 4.6365285)
+texture = ExtResource("6_x0st6")
+
+[node name="Infrastructure2" type="Sprite2D" parent="Lights" index="6"]
+modulate = Color(1, 1, 1, 0.02745098)
+position = Vector2(-1392, 8.000001)
+scale = Vector2(1.744, 4.718044)
+texture = ExtResource("6_x0st6")
+
+[node name="Infrastructure3" type="Sprite2D" parent="Lights" index="7"]
+modulate = Color(1, 1, 1, 0.02745098)
+position = Vector2(-397.93927, -2192.0002)
+rotation = 1.5707964
+scale = Vector2(1.744, 8.885616)
+texture = ExtResource("6_x0st6")
+
+[node name="Hole" type="Sprite2D" parent="Lights" index="8"]
+modulate = Color(0.5882353, 0.3647059, 0.09019608, 0.08235294)
+position = Vector2(1962, -1580)
+scale = Vector2(3.0582964, 3.0582962)
+texture = ExtResource("7_0kuad")
+
+[node name="Hole2" type="Sprite2D" parent="Lights" index="9"]
+modulate = Color(0.5882353, 0.3647059, 0.09019608, 0.08235294)
+position = Vector2(-93.99988, -574)
+scale = Vector2(3.0582964, 3.0582962)
+texture = ExtResource("7_0kuad")
+
+[node name="Hole3" type="Sprite2D" parent="Lights" index="10"]
+modulate = Color(0.5882353, 0.3647059, 0.09019608, 0.08235294)
+position = Vector2(-2146, -2572)
+scale = Vector2(3.0582964, 3.0582962)
+texture = ExtResource("7_0kuad")
+
+[node name="Hole4" type="Sprite2D" parent="Lights" index="11"]
+modulate = Color(0.5882353, 0.3647059, 0.09019608, 0.08235294)
+position = Vector2(-2099, 254)
+scale = Vector2(3.0582964, 3.0582962)
+texture = ExtResource("7_0kuad")
+
+[node name="Lattice" type="Sprite2D" parent="Lights" index="12"]
+modulate = Color(1, 1, 1, 0.03137255)
+position = Vector2(2143, 256)
+texture = ExtResource("8_tkhku")
+
+[node name="Lattice2" type="Sprite2D" parent="Lights" index="13"]
+modulate = Color(1, 1, 1, 0.03137255)
+position = Vector2(-2149, -349)
+texture = ExtResource("8_tkhku")
+
+[node name="Lattice3" type="Sprite2D" parent="Lights" index="14"]
+modulate = Color(1, 1, 1, 0.03137255)
+position = Vector2(-2920, 452)
+texture = ExtResource("8_tkhku")
+
+[node name="Lattice4" type="Sprite2D" parent="Lights" index="15"]
+modulate = Color(1, 1, 1, 0.03137255)
+position = Vector2(-2921, 714)
+texture = ExtResource("8_tkhku")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." index="4"]
+color = Color(0.2884846, 0.39561275, 0.5373894, 1)
+blend_mode = 1
+
+[node name="ExitGateArea" type="Area2D" parent="." index="5"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitGateArea" index="0"]
+position = Vector2(791, 1001)
+shape = SubResource("RectangleShape2D_0kuad")
+
+[connection signal="body_entered" from="ExitGateArea" to="." method="_on_exit_gate_area_body_entered"]

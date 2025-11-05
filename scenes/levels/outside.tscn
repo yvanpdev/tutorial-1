@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://ivvab4gnfrg3"]
+[gd_scene load_steps=19 format=4 uid="uid://ivvab4gnfrg3"]
 
 [ext_resource type="PackedScene" uid="uid://cgc7071007t1v" path="res://scenes/levels/level.tscn" id="1_2s4ok"]
 [ext_resource type="Texture2D" uid="uid://cay03bxfltwqo" path="res://graphics/ground/stones.png" id="2_qvsb0"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://l57nvayoeyvv" path="res://scenes/objects/house.tscn" id="10_cnio0"]
 [ext_resource type="PackedScene" uid="uid://dclrx3r0n4mr" path="res://scenes/objects/steam_vent.tscn" id="11_6u4a0"]
 [ext_resource type="PackedScene" uid="uid://onpdy75jxora" path="res://scenes/objects/light_fan_animation.tscn" id="12_oe17f"]
-[ext_resource type="PackedScene" uid="uid://b0d77mhii6khr" path="res://scenes/enemies/drone.tscn" id="15_ex6t8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbwx5"]
 resource_name = "walls"
@@ -54,6 +53,9 @@ sources/0 = SubResource("TileSetAtlasSource_vkmey")
 
 [node name="Outside" instance=ExtResource("1_2s4ok")]
 script = ExtResource("2_xqqjy")
+
+[node name="Ground" parent="." index="0"]
+metadata/_edit_lock_ = true
 
 [node name="Soil" type="Sprite2D" parent="Ground" index="0"]
 texture_repeat = 2
@@ -133,7 +135,9 @@ autoplay = "default"
 [node name="Gate" parent="." index="1" instance=ExtResource("2_x73sx")]
 metadata/_edit_lock_ = true
 
-[node name="Drone" parent="." index="4" instance=ExtResource("15_ex6t8")]
-position = Vector2(184, 788)
+[node name="Player" parent="." index="3"]
+position = Vector2(561, 411.00006)
 
+[connection signal="player_entered" from="Ground/House" to="." method="_on_house_player_entered"]
+[connection signal="player_exit" from="Ground/House" to="." method="_on_house_player_exit"]
 [connection signal="player_entered_gate" from="Gate" to="." method="_on_gate_player_entered_gate"]

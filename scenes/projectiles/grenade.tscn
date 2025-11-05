@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://befnut1v6b4nf"]
+[gd_scene load_steps=12 format=3 uid="uid://befnut1v6b4nf"]
 
 [ext_resource type="Texture2D" uid="uid://btut4y5fo24lx" path="res://graphics/projectiles/grenade.png" id="1_1mnvm"]
 [ext_resource type="Script" uid="uid://cyab71804m4qo" path="res://scenes/projectiles/grenade.gd" id="1_b7x1w"]
@@ -11,6 +11,36 @@ bounce = 0.4
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b7x1w"]
 radius = 77.92946
+
+[sub_resource type="Animation" id="Animation_2die0"]
+resource_name = "Blinking"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335, 0.19999999, 0.36666667, 0.5, 0.6333333, 0.76666665, 0.9333333, 1.1, 1.2333333, 1.3666666, 1.4333333, 1.5999999, 1.7666667, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 10.0, 0.0, 10.0, 0.0, 0.0, 10.0, 0.0, 10.0, 0.0, 0.0, 10.0, 0.0, 10.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"explode"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_oqjs3"]
 resource_name = "Explosion"
@@ -141,42 +171,15 @@ tracks/4/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_2die0"]
-resource_name = "Blinking"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../PointLight2D:energy")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.033333335, 0.19999999, 0.36666667, 0.5, 0.6333333, 0.76666665, 0.9333333, 1.1, 1.2333333, 1.3666666, 1.4333333, 1.5999999, 1.7666667, 1.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 10.0, 0.0, 10.0, 0.0, 0.0, 10.0, 0.0, 10.0, 0.0, 0.0, 10.0, 0.0, 10.0]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("..")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(2),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"explode"
-}]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2die0"]
 _data = {
 &"Blinking": SubResource("Animation_2die0"),
 &"Explosion": SubResource("Animation_oqjs3"),
 &"RESET": SubResource("Animation_u7dq4")
 }
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_oqjs3"]
+polygon = PackedVector2Array(6, -30, 12, -28, 17, -25, 23, -20, 27, -14, 29, -14, 31, -10, 31, -8, 30, -6, 31, -1, 30, 7, 27, 15, 24, 20, 21, 23, 18, 25, 17, 27, 10, 30, 9, 29, 4, 30, -1, 30, -7, 29, -13, 27, -17, 25, -22, 21, -24, 18, -26, 17, -30, 11, -30, 9, -31, 4, -31, -3, -29, -12, -25, -18, -23, -21, -19, -24, -19, -27, -15, -29, -13, -28, -10, -29, -5, -30, 0, -30)
 
 [node name="Grenade" type="RigidBody2D"]
 collision_layer = 8
@@ -190,10 +193,6 @@ script = ExtResource("1_b7x1w")
 scale = Vector2(0.4, 0.4)
 shape = SubResource("CircleShape2D_b7x1w")
 
-[node name="Grenade" type="Sprite2D" parent="."]
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_1mnvm")
-
 [node name="Explosion" type="Sprite2D" parent="."]
 texture = ExtResource("3_3382y")
 hframes = 8
@@ -206,8 +205,15 @@ libraries = {
 }
 autoplay = "Blinking"
 
+[node name="Grenade" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_1mnvm")
+
 [node name="PointLight2D" type="PointLight2D" parent="."]
 scale = Vector2(0.080211684, 0.080000274)
 color = Color(0.76118284, 0.050026238, 0.16945353, 1)
 energy = 11.1
 texture = ExtResource("4_oqjs3")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_oqjs3")
